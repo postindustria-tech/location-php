@@ -1,5 +1,5 @@
 {
-    "name": "51Degrees/fiftyone.location",
+    "name": "51degrees/fiftyone.location",
     "description": "Location engines for 51Degrees Pipeline API - Get postal address details from the device connecting to your website or service",   
 	"authors" : [
 		{
@@ -60,9 +60,9 @@
         
     },
     "require": {
-        "51Degrees/fiftyone.pipeline.core": "@dev",
-        "51Degrees/fiftyone.pipeline.engines": "@dev",
-        "51Degrees/fiftyone.pipeline.cloudrequestengine": "@dev",
-        "51Degrees/fiftyone.pipeline.javascriptbundler": "@dev"
+        "51degrees/fiftyone.pipeline.core": "@dev",
+        "51degrees/fiftyone.pipeline.engines": "@dev",
+        "51degrees/fiftyone.pipeline.cloudrequestengine": "@dev",
+        "51degrees/fiftyone.pipeline.javascriptbundler": "@dev"
     }
 }
