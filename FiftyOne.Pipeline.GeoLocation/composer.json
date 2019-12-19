@@ -1,0 +1,48 @@
+{
+    "name": "fifty-one/fiftyone.pipeline.devicedetection",
+    "description": "V4 51Degrees Device Detection Library",
+    "type": "library",
+    "autoload": {
+        "classmap": [
+            "geolocation.php",
+            "geolocationPipelineBuilder.php"
+        ]
+    },
+    "repositories": {
+        "dev-core": {
+            "type": "path",
+            "url": "../FiftyOne.Pipeline.Core",
+            "options": {
+                "symlink": true
+            }
+        },
+        "dev-engines": {
+            "type": "path",
+            "url": "../FiftyOne.Pipeline.Engines",
+            "options": {
+                "symlink": true
+            }
+        },
+        "dev-cloud-request": {
+            "type": "path",
+            "url": "../FiftyOne.Pipeline.CloudRequestEngine",
+            "options": {
+                "symlink": true
+            }
+        },
+        "dev-javascript": {
+            "type": "path",
+            "url": "../FiftyOne.Pipeline.JavaScriptBundler",
+            "options": {
+                "symlink": true
+            }
+        }
+        
+    },
+    "require": {
+        "fifty-one/fiftyone.pipeline.core": "@dev",
+        "fifty-one/fiftyone.pipeline.engines": "@dev",
+        "fifty-one/fiftyone.pipeline.cloudrequestengine": "@dev",
+        "fifty-one/fiftyone.pipeline.javascriptbundler": "@dev"
+    }
+}
