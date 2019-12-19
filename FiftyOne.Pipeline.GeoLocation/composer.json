@@ -1,6 +1,26 @@
 {
-    "name": "fifty-one/fiftyone.pipeline.devicedetection",
-    "description": "V4 51Degrees Device Detection Library",
+    "name": "51Degrees/fiftyone.location",
+    "description": "Location engines for 51Degrees Pipeline API - Get postal address details from the device connecting to your website or service",   
+	"authors" : [
+		{
+			"name": "Filip Hnízdo",
+            "email": "filip@octophin.com",
+            "homepage": "https://octophindigital.com/"
+        },
+		{
+			"name": "Steve Ballantine",
+            "email": "stephen@51degrees.com"
+        },
+		{
+			"name": "Ben Shilito",
+            "email": "ben@51degrees.com"
+        },
+		{
+			"name": "Joseph Dix",
+            "email": "joseph@51degrees.com"
+        }
+	],
+    "license": "AGPL-3.0-or-later", 
     "type": "library",
     "autoload": {
         "classmap": [
@@ -40,9 +60,9 @@
         
     },
     "require": {
-        "fifty-one/fiftyone.pipeline.core": "@dev",
-        "fifty-one/fiftyone.pipeline.engines": "@dev",
-        "fifty-one/fiftyone.pipeline.cloudrequestengine": "@dev",
-        "fifty-one/fiftyone.pipeline.javascriptbundler": "@dev"
+        "51Degrees/fiftyone.pipeline.core": "@dev",
+        "51Degrees/fiftyone.pipeline.engines": "@dev",
+        "51Degrees/fiftyone.pipeline.cloudrequestengine": "@dev",
+        "51Degrees/fiftyone.pipeline.javascriptbundler": "@dev"
     }
 }
