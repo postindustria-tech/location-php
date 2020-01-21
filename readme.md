@@ -40,9 +40,20 @@ Examples can be found in the `FiftyOne.Pipeline.GeoLocation/` folder. See below 
 
 |Example|Description|Implemtation|
 |-------|-----------|------------|
-|gettingStarted.php|This example uses geo-location to determine the country from a longitude and latidude.|Cloud|
+|gettingStarted.php|This example uses geo-location to determine the country from a longitude and latitude.|Cloud|
 |configureFromFile.php|This examples creates a pipeline from a configuration file to set up geo-location.|Cloud|
 |combiningServices.php|This example uses geo-location alongside device detection to determine the country and device.|Cloud|
+
+## Tests
+
+In this repository, there are tests for the examples. 
+You will need to install the package dependencies to run them:
+
+`cd FiftyOne.Pipeline.GeoLocation && composer install`
+
+To run the tests, then call:
+
+`phpunit`
 
 ## Project documentation
 
