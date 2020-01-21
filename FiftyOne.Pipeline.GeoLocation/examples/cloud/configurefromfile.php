@@ -24,8 +24,19 @@
 /**
  * @example cloud/configurefromfile.php
  *
- * Configure from file example of using 51Degrees geolocation.
+ * Example of setting up the 51Degrees geo-location Cloud using a confiuration file to determine the country and device for a given longitude and latitude.
+ * 
+ * This example is available in full on [GitHub](https://github.com/51Degrees/location-php/blob/release/v4.1.0/examples/cloud/configuringfromfile.js). 
+ * (During the beta period, this repository will be private. 
+ * [Contact us](mailto:support.51degrees.com) to request access) 
  *
+ * To run this example, you will need to create a **resource key**. 
+ * The resource key is used as short-hand to store the particular set of 
+ * properties you are interested in as well as any associated license keys 
+ * that entitle you to increased request limits and/or paid-for properties.
+ *
+ * You can create a resource key using the 51Degrees [Configurator](https://configure.51degrees.com).
+ * *
  * The example shows how to:
  *
  * 1. Create a Pipeline configuration from an JSON file.
