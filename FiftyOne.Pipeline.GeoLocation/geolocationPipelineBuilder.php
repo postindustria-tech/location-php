@@ -58,7 +58,7 @@ class geoLocationPipelineBuilder extends pipelineBuilder {
 
         $flowElements[] = $javascriptBundler;
 
-        $geolocation = new geoLocation($settings["type"]);
+        $geolocation = new geoLocation($settings["locationProvider"]);
 
         $flowElements[] = $geolocation;
 

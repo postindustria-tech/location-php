@@ -32,10 +32,18 @@ use fiftyone\pipeline\engines\engine;
 
 class geoLocation extends engine {
 
-    // Type - location or osm_location
-    public function __construct($type){
+    // Location Provider - fiftyonedegrees or digitalelement
+    public function __construct($locationProvider){
 
-        $this->dataKey = $type;
+        if ($locationProvider === "digitalelement"){
+
+            $this->dataKey = "location_digitalelement";
+
+        } else {
+
+            $this->dataKey = "location";
+
+        }
 
     }
 

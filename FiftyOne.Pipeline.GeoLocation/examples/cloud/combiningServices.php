@@ -78,7 +78,7 @@ use fiftyone\pipeline\devicedetection\deviceDetectionCloud;
 $builder = new geoLocationPipelineBuilder(array(
     // Obtain a resource key from https://configure.51degrees.com
     "resourceKey" => "",
-    "type" => "location",
+    "locationProvider" => "fiftyonedegrees",
     "restrictedProperties" => array() // All properties by default
 ));
 
