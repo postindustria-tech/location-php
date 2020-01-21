@@ -44,6 +44,13 @@ Examples can be found in the `FiftyOne.Pipeline.GeoLocation/` folder. See below 
 |configurefromfile.php|This examples creates a pipeline from a configuration file to set up geo-location.|Cloud|
 |combiningservices.php|This example uses geo-location alongside device detection to determine the country and device.|Cloud|
 
+To run the examples, go to the `FiftyOne.Pipeline.GeoLocation/examples` directory and run:
+
+`php -S locahost:8080`
+
+The examples will now be available to view in a browser. For example, the cloud getting started example will be available
+by browsing to `localhost:8080/cloud/gettingstarted.php`.
+
 ## Tests
 
 In this repository, there are tests for the examples. 
