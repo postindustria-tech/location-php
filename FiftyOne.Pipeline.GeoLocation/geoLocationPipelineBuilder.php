@@ -30,7 +30,7 @@ require(__DIR__ . "/vendor/autoload.php");
 use fiftyone\pipeline\core\pipelineBuilder;
 use fiftyone\pipeline\core\pipeline;
 use fiftyone\pipeline\cloudrequestengine\cloudRequestEngine;
-use fiftyone\pipeline\geolocation\geolocation;
+use fiftyone\pipeline\geolocation\geoLocation;
 use fiftyone\pipeline\javascriptbundler\javaScriptBundlerElement;
 
 class geoLocationPipelineBuilder extends pipelineBuilder {
@@ -63,11 +63,11 @@ class geoLocationPipelineBuilder extends pipelineBuilder {
         $flowElements[] = $geolocation;
 
         // Add any extra flowElements
-        
+
         $flowElements = array_merge($flowElements, $this->flowElements);
-        
+
         $flowElements[] = $javascriptBundler;
-        
+
         $this->flowElements = $flowElements;
 
     }
