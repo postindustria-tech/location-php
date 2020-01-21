@@ -1,8 +1,7 @@
 <phpunit>
   <testsuites>
     <testsuite name="Tests">
-      <file>FiftyOne.Pipeline.Core/tests/index.php</file>
-      <file>FiftyOne.Pipeline.Engines/tests/index.php</file>
+      <file>FiftyOne.Pipeline.GeoLocation/examples/index.php</file>
     </testsuite>
   </testsuites>
 </phpunit>

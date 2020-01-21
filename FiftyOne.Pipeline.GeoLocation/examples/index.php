@@ -1,30 +1,34 @@
 <?php
-/* ********************************************************************
- * Copyright (C) 2019  51Degrees Mobile Experts Limited.
+/* *********************************************************************
+ * This Original Work is copyright of 51 Degrees Mobile Experts Limited.
+ * Copyright 2019 51 Degrees Mobile Experts Limited, 5 Charlotte Close,
+ * Caversham, Reading, Berkshire, United Kingdom RG4 7BY.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This Original Work is licensed under the European Union Public Licence (EUPL) 
+ * v.1.2 and is subject to its terms as set out below.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * If a copy of the EUPL was not distributed with this file, You can obtain
+ * one at https://opensource.org/licenses/EUPL-1.2.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- * ******************************************************************** */
+ * The 'Compatible Licences' set out in the Appendix to the EUPL (as may be
+ * amended by the European Commission) shall be deemed incompatible for
+ * the purposes of the Work and the provisions of the compatibility
+ * clause in Article 5 of the EUPL shall not apply.
+ * 
+ * If using the Work as, or as part of, a network application, by 
+ * including the attribution notice(s) required under Article 5 of the EUPL
+ * in the end user terms of the application under an appropriate heading, 
+ * such notice(s) shall fulfill the requirements of that article.
+ * ********************************************************************* */
 
 
 
 require(__DIR__ . "/../vendor/autoload.php");
 
 use fiftyone\pipeline\cloudrequestengine\cloudRequestEngine;
-use fiftyone\pipeline\geolocation\geolocationPipelineBuilder;
+use fiftyone\pipeline\geolocation\geoLocationPipelineBuilder;
 
-$geolocationPipeline = new geolocationPipelineBuilder(array(
-    //"licenseKey" => "<YOUR LICENSE KEY>",
+$geolocationPipeline = new geoLocationPipelineBuilder(array(
     "resourceKey" => "AQS5HKcy0uPi3zrv1kg",
     "type" => "location"
 ));
