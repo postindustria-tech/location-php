@@ -23,27 +23,53 @@
 
 
 
-require(__DIR__ . "/../vendor/autoload.php");
+namespace fiftyone\pipeline\geolocation;
 
+require(__DIR__ . "/vendor/autoload.php");
+
+use fiftyone\pipeline\core\pipelineBuilder;
+use fiftyone\pipeline\core\pipeline;
 use fiftyone\pipeline\cloudrequestengine\cloudRequestEngine;
-use fiftyone\pipeline\geolocation\geoLocationPipelineBuilder;
+use fiftyone\pipeline\geolocation\geoLocation;
+use fiftyone\pipeline\javascriptbundler\javaScriptBundlerElement;
 
-$geolocationPipeline = new geoLocationPipelineBuilder(array(
-    "resourceKey" => "AQS5HKcy0uPi3zrv1kg",
-    "locationProvider" => "fiftyonedegrees"
-));
+class geoLocationPipelineBuilder extends pipelineBuilder {
 
-$geolocationPipeline = $geolocationPipeline->build();
+    public $restrictedProperties;
+    public $cache;
+    public $resourceKey;
+    public $licenseKey;
 
-$flowData = $geolocationPipeline->createFlowData();
+    public function __construct($settings){
 
-$flowData->evidence->setFromWebRequest();
+        // Add cloudrequestEngine
 
-$pipelineResult = $flowData->process();
+        $cloud = new cloudRequestEngine();
 
-$javascript = $pipelineResult->get("javascriptbundler")->get("javascript");
+        $cloud->setResourceKey($settings["resourceKey"]);
 
-echo "<script>";
-echo $javascript;
-echo "</script>";
+        $flowElements = [];
 
+        $flowElements[] = $cloud;
+
+        // Add JavaScript bundler
+
+        $javascriptBundler = new javaScriptBundlerElement();
+
+        $flowElements[] = $javascriptBundler;
+
+        $geolocation = new geoLocation($settings["locationProvider"]);
+
+        $flowElements[] = $geolocation;
+
+        // Add any extra flowElements
+
+        $flowElements = array_merge($flowElements, $this->flowElements);
+
+        $flowElements[] = $javascriptBundler;
+
+        $this->flowElements = $flowElements;
+
+    }
+
+};

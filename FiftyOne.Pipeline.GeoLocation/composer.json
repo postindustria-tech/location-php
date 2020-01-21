@@ -1,6 +1,6 @@
 {
-    "name": "51degrees/fiftyone.location",
-    "description": "Location engines for 51Degrees Pipeline API - Get postal address details from the device connecting to your website or service",   
+    "name": "51degrees/fiftyone.geolocation",
+    "description": "Geo-Location engines for 51Degrees Pipeline API - Get postal address details from the device connecting to your website or service",   
 	"authors" : [
 		{
 			"name": "Filip Hnízdo",
@@ -20,12 +20,12 @@
             "email": "joseph@51degrees.com"
         }
 	],
-    "license": "AGPL-3.0-or-later", 
+    "license": "EUPL-1.2", 
     "type": "library",
     "autoload": {
         "classmap": [
-            "geolocation.php",
-            "geolocationPipelineBuilder.php"
+            "geoLocation.php",
+            "geoLocationPipelineBuilder.php"
         ]
     },
     "repositories": {
@@ -64,5 +64,8 @@
         "51degrees/fiftyone.pipeline.engines": "@dev",
         "51degrees/fiftyone.pipeline.cloudrequestengine": "@dev",
         "51degrees/fiftyone.pipeline.javascriptbundler": "@dev"
+    },
+    "require-dev": {
+        "51degrees/fiftyone.devicedetection": "@dev"
     }
 }

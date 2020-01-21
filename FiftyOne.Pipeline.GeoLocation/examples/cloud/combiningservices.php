@@ -22,11 +22,11 @@
  * ********************************************************************* */
 
 /**
- * @example cloud/gettingstarted.php
+ * @example cloud/combiningservices.php
  *
- * Example of using the 51Degrees geo-location Cloud to determine the country and device for a given longitude and latitude.
+ * Example of using the 51Degrees geo-location Cloud alongside 51Degrees device detection to determine the country and device for a given longitude, latitude and User-Agent.
  * 
- * This example is available in full on [GitHub](https://github.com/51Degrees/location-php/blob/release/v4.1.0/examples/cloud/gettingstarted.js). 
+ * This example is available in full on [GitHub](https://github.com/51Degrees/location-php/blob/release/v4.1.0/examples/cloud/combiningservices.js). 
  * (During the beta period, this repository will be private. 
  * [Contact us](mailto:support.51degrees.com) to request access) 
  *
@@ -35,11 +35,15 @@
  * properties you are interested in as well as any associated license keys 
  * that entitle you to increased request limits and/or paid-for properties.
  *
+ * You will also need to install the fiftyone.devicedetection package by running
+ * `composer install --dev`.
+ *
  * You can create a resource key using the 51Degrees [Configurator](https://configure.51degrees.com).
  *
  * The example shows how to:
  *
- * 1. Build a new Pipeline to use cloud geolocation engine.
+ * 1. Build a new Pipeline to use cloud geolocation engine, adding a cloud
+ * device detection engine.
  * ```
  * $builder = new geoLocationPipelineBuilder(array(
  *     // Obtain a resource key from https://configure.51degrees.com
@@ -47,6 +51,7 @@
  *     "type" => "location",
  *     "restrictedProperties" => array() // All properties by default
  * ));
+ * $builder->add(new deviceDetectionCloud());
  * $pipeline = $builder->build();
  * ```
  *
@@ -65,7 +70,8 @@
  *
  * 4. Extract the value of a property as a string from the results.
  * ```
- * echo "Country: " . $result->get("location")->get("country");
+ * echo "Country: " . $result->get("location")->get("country") . "<br/>";
+ * echo "IsMobile: " . $result->get("device")->get("ismobile") . "<br/>";
  * ```
  *
  * 5. Add the JavaScript required to get extra information from the device. This is
@@ -79,7 +85,8 @@
 
 require(__DIR__ . "/../../vendor/autoload.php");
 
-use fiftyone\pipeline\geolocation\geoLocationPipelineBuilder;
+use fiftyone\pipeline\geolocation\geoLocation;
+use fiftyone\pipeline\devicedetection\deviceDetectionCloud;
 
 // Create a simple pipeline to access the engine with.
 $builder = new geoLocationPipelineBuilder(array(
@@ -88,6 +95,10 @@ $builder = new geoLocationPipelineBuilder(array(
     "locationProvider" => "fiftyonedegrees",
     "restrictedProperties" => array() // All properties by default
 ));
+
+// Add device detection.
+$builder->add(new deviceDetectionCloud());
+
 $pipeline = $builder->build();
 
 $flowData = $pipeline->createFlowData();
@@ -100,4 +111,5 @@ echo "<script>";
 echo $result->get("javascriptbundler")->get("javascript");
 echo "</script>";
 
-echo "Country: " . $result->get("location")->get("country");
+echo "Country: " . $result->get("location")->get("country") . "<br/>";
+echo "IsMobile: " . $result->get("device")->get("ismobile") . "<br/>";

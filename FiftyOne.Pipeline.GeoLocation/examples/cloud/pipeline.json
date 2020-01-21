@@ -8,7 +8,7 @@
       "BuilderName": "geoLocation",
       "BuildParameters": {
       "ResourceKey": "Obtain a resource key from https://configure.51degrees.com",
-      "Type": "location",      
+      "LocationProvider": "fiftyonedegrees",      
       "RestrictedProperties": []
     }
     },
