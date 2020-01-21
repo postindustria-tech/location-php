@@ -20,7 +20,7 @@
             "email": "joseph@51degrees.com"
         }
 	],
-    "license": "AGPL-3.0-or-later", 
+    "license": "EUPL-1.2", 
     "type": "library",
     "autoload": {
         "classmap": [
