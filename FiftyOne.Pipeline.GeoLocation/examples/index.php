@@ -30,7 +30,7 @@ use fiftyone\pipeline\geolocation\geoLocationPipelineBuilder;
 
 $geolocationPipeline = new geoLocationPipelineBuilder(array(
     "resourceKey" => "AQS5HKcy0uPi3zrv1kg",
-    "type" => "location"
+    "locationProvider" => "fiftyonedegrees"
 ));
 
 $geolocationPipeline = $geolocationPipeline->build();
