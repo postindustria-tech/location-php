@@ -28,6 +28,7 @@ namespace fiftyone\pipeline\geolocation;
 require(__DIR__ . "/vendor/autoload.php");
 
 use fiftyone\pipeline\engines\aspectDataDictionary;
+use fiftyone\pipeline\engines\aspectPropertyValue;
 use fiftyone\pipeline\engines\engine;
 
 class geoLocation extends engine {
@@ -77,10 +78,28 @@ class geoLocation extends engine {
 
             $cloudData = \json_decode($cloudData, true);
 
-            $deviceData = $cloudData[$this->dataKey];
+            $nullValueReasons = $cloudData["nullValueReasons"];
 
-            $data = new aspectDataDictionary($this, $deviceData);
-            
+            $result = [];
+
+            foreach ($cloudData[$thid->dataKey] as $key => $value){
+
+                if(isset($cloudData["nullValueReasons"][$this->dataKey . "." . $key])){
+                    
+                    $result[$key] = new aspectPropertyValue($cloudData["nullValueReasons"][$this->dataKey . "." . $key]);
+
+                } else {
+
+                    $result[$key] = new aspectPropertyValue(null, $value);
+
+                }
+
+            };
+
+            $geoData = $result;
+
+            $data = new aspectDataDictionary($this, $geoData);
+
             $flowData->setElementData($data);
 
         }

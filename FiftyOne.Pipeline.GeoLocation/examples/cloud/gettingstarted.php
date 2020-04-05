@@ -100,4 +100,4 @@ echo "<script>";
 echo $result->get("javascriptbundler")->get("javascript");
 echo "</script>";
 
-echo "Country: " . $result->get("location")->get("country");
+echo "Country: " . $result->get("location")->get("country")->value;
