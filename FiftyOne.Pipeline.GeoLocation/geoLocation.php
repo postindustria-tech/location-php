@@ -78,15 +78,14 @@ class geoLocation extends engine {
 
             $cloudData = \json_decode($cloudData, true);
 
-            $nullValueReasons = $cloudData["nullValueReasons"];
 
             $result = [];
 
-            foreach ($cloudData[$thid->dataKey] as $key => $value){
+            foreach ($cloudData[$this->dataKey] as $key => $value){
 
-                if(isset($cloudData["nullValueReasons"][$this->dataKey . "." . $key])){
+                if(isset($cloudData[$this->dataKey][$key . "nullreason"])){
                     
-                    $result[$key] = new aspectPropertyValue($cloudData["nullValueReasons"][$this->dataKey . "." . $key]);
+                    $result[$key] = new aspectPropertyValue($cloudData[$this->dataKey][$key . "nullreason"]);
 
                 } else {
 
