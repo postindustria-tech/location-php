@@ -28,7 +28,7 @@ namespace fiftyone\pipeline\geolocation;
 require(__DIR__ . "/vendor/autoload.php");
 
 use fiftyone\pipeline\engines\aspectDataDictionary;
-use fiftyone\pipeline\engines\aspectPropertyValue;
+use fiftyone\pipeline\core\aspectPropertyValue;
 use fiftyone\pipeline\engines\engine;
 
 class geoLocation extends engine {

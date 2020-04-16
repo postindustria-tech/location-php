@@ -26,9 +26,7 @@
  *
  * Example of using the 51Degrees geo-location Cloud alongside 51Degrees device detection to determine the country and device for a given longitude, latitude and User-Agent.
  * 
- * This example is available in full on [GitHub](https://github.com/51Degrees/location-php/blob/release/v4.1.0/examples/cloud/combiningservices.js). 
- * (During the beta period, this repository will be private. 
- * [Contact us](mailto:support.51degrees.com) to request access) 
+ * This example is available in full on [GitHub](https://github.com/51Degrees/location-php/blob/release/master/cloud/combiningservices.js). 
  *
  * To run this example, you will need to create a **resource key**. 
  * The resource key is used as short-hand to store the particular set of 
@@ -88,28 +86,43 @@ require(__DIR__ . "/../../vendor/autoload.php");
 use fiftyone\pipeline\geolocation\geoLocation;
 use fiftyone\pipeline\devicedetection\deviceDetectionCloud;
 
-// Create a simple pipeline to access the engine with.
-$builder = new geoLocationPipelineBuilder(array(
-    // Obtain a resource key from https://configure.51degrees.com
-    "resourceKey" => "",
-    "locationProvider" => "fiftyonedegrees",
-    "restrictedProperties" => array() // All properties by default
-));
+// Create your own recource key for free at https://configure.51degrees.com. 
+// Then enter it below, replacing !!YOUR_RESOURCE_KEY!!
+$resourceKey = "!!YOUR_RESOURCE_KEY!!";
 
-// Add device detection.
-$builder->add(new deviceDetectionCloud());
+if(substr($resourceKey, 0, 2) == "!!") {
+    echo "You need to create a resource key at " .
+        "https://configure.51degrees.com and paste it into the code, " .
+        "replacing !!YOUR_RESOURCE_KEY!!.";
+    echo "</br>";
+    echo "Make sure to include the Country property as " .
+        "it is used by this example.";
+}
+else 
+{
+    // Create a simple pipeline to access the engine with.
+    $builder = new geoLocationPipelineBuilder(array(
+        // Obtain a resource key from https://configure.51degrees.com
+        "resourceKey" => $resourceKey,
+        "locationProvider" => "fiftyonedegrees",
+        "restrictedProperties" => array() // All properties by default
+    ));
 
-$pipeline = $builder->build();
+    // Add device detection.
+    $builder->add(new deviceDetectionCloud());
 
-$flowData = $pipeline->createFlowData();
+    $pipeline = $builder->build();
 
-$flowData->evidence->setFromWebRequest();
+    $flowData = $pipeline->createFlowData();
 
-$result = $flowData->process();
+    $flowData->evidence->setFromWebRequest();
 
-echo "<script>";
-echo $result->get("javascriptbundler")->get("javascript");
-echo "</script>";
+    $result = $flowData->process();
 
-echo "Country: " . $result->get("location")->get("country") . "<br/>";
-echo "IsMobile: " . $result->get("device")->get("ismobile") . "<br/>";
+    echo "<script>";
+    echo $result->get("javascriptbuilder")->get("javascript");
+    echo "</script>";
+
+    echo "Country: " . $result->get("location")->get("country") . "<br/>";
+    echo "IsMobile: " . $result->get("device")->get("ismobile") . "<br/>";
+}

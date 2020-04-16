@@ -26,9 +26,7 @@
  *
  * Example of using the 51Degrees geo-location Cloud to determine the country and device for a given longitude and latitude.
  * 
- * This example is available in full on [GitHub](https://github.com/51Degrees/location-php/blob/release/v4.1.0/examples/cloud/gettingstarted.js). 
- * (During the beta period, this repository will be private. 
- * [Contact us](mailto:support.51degrees.com) to request access) 
+ * This example is available in full on [GitHub](https://github.com/51Degrees/location-php/blob/master/examples/cloud/gettingstarted.js). 
  *
  * To run this example, you will need to create a **resource key**. 
  * The resource key is used as short-hand to store the particular set of 
@@ -81,23 +79,42 @@ require(__DIR__ . "/../../vendor/autoload.php");
 
 use fiftyone\pipeline\geolocation\geoLocationPipelineBuilder;
 
-// Create a simple pipeline to access the engine with.
-$builder = new geoLocationPipelineBuilder(array(
-    // Obtain a resource key from https://configure.51degrees.com
-    "resourceKey" => "",
-    "locationProvider" => "fiftyonedegrees",
-    "restrictedProperties" => array() // All properties by default
-));
-$pipeline = $builder->build();
+// Create your own recource key for free at https://configure.51degrees.com. 
+// Then enter it below, replacing !!YOUR_RESOURCE_KEY!!
+$resourceKey = "!!YOUR_RESOURCE_KEY!!";
 
-$flowData = $pipeline->createFlowData();
+if(substr($resourceKey, 0, 2) == "!!") {
+    echo "You need to create a resource key at " .
+        "https://configure.51degrees.com and paste it into the code, " .
+        "replacing !!YOUR_RESOURCE_KEY!!.";
+    echo "</br>";
+    echo "Make sure to include the Country property as " .
+        "it is used by this example.";
+}
+else 
+{
+    // Create a simple pipeline to access the engine with.
+    $builder = new geoLocationPipelineBuilder(array(
+        // Obtain a resource key from https://configure.51degrees.com
+        "resourceKey" => $resourceKey,
+        "locationProvider" => "fiftyonedegrees",
+        "restrictedProperties" => array(), // All properties by default
+    ));
+    $pipeline = $builder->build();
 
-$flowData->evidence->setFromWebRequest();
+    $flowData = $pipeline->createFlowData();
 
-$result = $flowData->process();
+    $flowData->evidence->setFromWebRequest();
 
-echo "<script>";
-echo $result->get("javascriptbundler")->get("javascript");
-echo "</script>";
+    $result = $flowData->process();
 
-echo "Country: " . $result->get("location")->get("country")->value;
+    echo "<script>";
+    echo $result->javascriptbuilder->javascript;
+    echo "</script>";
+
+    if($result->location->country->hasValue){
+        echo "Country: " . $result->get("location")->get("country")->value;
+    } else {
+        echo $result->location->country->noValueMessage;
+    }
+}

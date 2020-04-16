@@ -26,9 +26,7 @@
  *
  * Example of setting up the 51Degrees geo-location Cloud using a confiuration file to determine the country and device for a given longitude and latitude.
  * 
- * This example is available in full on [GitHub](https://github.com/51Degrees/location-php/blob/release/v4.1.0/examples/cloud/configuringfromfile.js). 
- * (During the beta period, this repository will be private. 
- * [Contact us](mailto:support.51degrees.com) to request access) 
+ * This example is available in full on [GitHub](https://github.com/51Degrees/location-php/blob/master/examples/cloud/configuringfromfile.js). 
  *
  * To run this example, you will need to create a **resource key**. 
  * The resource key is used as short-hand to store the particular set of 
@@ -87,7 +85,7 @@ $flowData->evidence->setFromWebRequest();
 $result = $flowData->process();
 
 echo "<script>";
-echo $result->get("javascriptbundler")->get("javascript");
+echo $result->get("javascriptbuilder")->get("javascript");
 echo "</script>";
 
 echo "Country: " . $result->get("location")->get("country");

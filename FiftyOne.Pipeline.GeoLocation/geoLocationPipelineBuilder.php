@@ -42,21 +42,23 @@ class geoLocationPipelineBuilder extends pipelineBuilder {
 
     public function __construct($settings){
 
+        parent::__construct($settings);
+
         // Add cloudrequestEngine
 
         $cloud = new cloudRequestEngine();
 
         $cloud->setResourceKey($settings["resourceKey"]);
 
+        $cloud->baseURL = "https://cloud.51degrees.com/api/v4/";
+
+        if(isset($settings["cloudEndPoint"])){
+            $cloud->baseURL = $settings["cloudEndPoint"];
+        }
+
         $flowElements = [];
 
         $flowElements[] = $cloud;
-
-        // Add JavaScript bundler
-
-        $javascriptBundler = new javaScriptBundlerElement();
-
-        $flowElements[] = $javascriptBundler;
 
         $geolocation = new geoLocation($settings["locationProvider"]);
 
@@ -65,8 +67,6 @@ class geoLocationPipelineBuilder extends pipelineBuilder {
         // Add any extra flowElements
 
         $flowElements = array_merge($flowElements, $this->flowElements);
-
-        $flowElements[] = $javascriptBundler;
 
         $this->flowElements = $flowElements;
 

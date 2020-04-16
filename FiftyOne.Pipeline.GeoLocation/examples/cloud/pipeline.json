@@ -1,19 +1,16 @@
 {
   "PipelineOptions": {
     "Elements": [
-    {
-      "BuilderName": "cloudRequestEngine"
-    },
-    {
-      "BuilderName": "geoLocation",
-      "BuildParameters": {
-      "ResourceKey": "Obtain a resource key from https://configure.51degrees.com",
-      "LocationProvider": "fiftyonedegrees",      
-      "RestrictedProperties": []
-    }
-    },
-    {
-      "BuilderName": "javaScriptBundlerElement"
+      {
+        "BuilderName": "cloudRequestEngine"
+      },
+      {
+        "BuilderName": "geoLocation",
+        "BuildParameters": {
+        "ResourceKey": "Obtain a resource key from https://configure.51degrees.com",
+        "LocationProvider": "fiftyonedegrees",      
+        "RestrictedProperties": []
+      }
     }]
   }
 }
