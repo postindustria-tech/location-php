@@ -4,7 +4,7 @@
  * Copyright 2019 51 Degrees Mobile Experts Limited, 5 Charlotte Close,
  * Caversham, Reading, Berkshire, United Kingdom RG4 7BY.
  *
- * This Original Work is licensed under the European Union Public Licence (EUPL) 
+ * This Original Work is licensed under the European Union Public Licence (EUPL)
  * v.1.2 and is subject to its terms as set out below.
  *
  * If a copy of the EUPL was not distributed with this file, You can obtain
@@ -14,53 +14,50 @@
  * amended by the European Commission) shall be deemed incompatible for
  * the purposes of the Work and the provisions of the compatibility
  * clause in Article 5 of the EUPL shall not apply.
- * 
- * If using the Work as, or as part of, a network application, by 
+ *
+ * If using the Work as, or as part of, a network application, by
  * including the attribution notice(s) required under Article 5 of the EUPL
- * in the end user terms of the application under an appropriate heading, 
+ * in the end user terms of the application under an appropriate heading,
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
-
-
 
 namespace fiftyone\pipeline\geolocation;
 
 require(__DIR__ . "/vendor/autoload.php");
 
-use fiftyone\pipeline\core\pipelineBuilder;
-use fiftyone\pipeline\core\pipeline;
-use fiftyone\pipeline\cloudrequestengine\cloudRequestEngine;
-use fiftyone\pipeline\geolocation\geoLocation;
-use fiftyone\pipeline\javascriptbundler\javaScriptBundlerElement;
+use fiftyone\pipeline\core\PipelineBuilder;
+use fiftyone\pipeline\cloudrequestengine\CloudRequestEngine;
+use fiftyone\pipeline\geolocation\GeoLocationCloud;
 
-class geoLocationPipelineBuilder extends pipelineBuilder {
-
+/**
+* Extension of pipelineBuilder class that allows for the quick generation
+* of a geolocation pipeline.
+*/
+class GeoLocationPipelineBuilder extends PipelineBuilder
+{
     public $restrictedProperties;
     public $cache;
     public $resourceKey;
     public $licenseKey;
 
-    public function __construct($settings){
-
+    public function __construct($settings)
+    {
+        /**
+        * Constructor takes a settings array with pipeline settings
+        * Including:
+        * * locationProvider (digitalelement or fiftyonedegrees)
+        * * resourceKey
+        */
         parent::__construct($settings);
 
         // Add cloudrequestEngine
-
-        $cloud = new cloudRequestEngine();
-
-        $cloud->setResourceKey($settings["resourceKey"]);
-
-        $cloud->baseURL = "https://cloud.51degrees.com/api/v4/";
-
-        if(isset($settings["cloudEndPoint"])){
-            $cloud->baseURL = $settings["cloudEndPoint"];
-        }
+        $cloud = new CloudRequestEngine($settings);
 
         $flowElements = [];
 
         $flowElements[] = $cloud;
 
-        $geolocation = new geoLocation($settings["locationProvider"]);
+        $geolocation = new GeoLocationCloud($settings);
 
         $flowElements[] = $geolocation;
 
@@ -69,7 +66,5 @@ class geoLocationPipelineBuilder extends pipelineBuilder {
         $flowElements = array_merge($flowElements, $this->flowElements);
 
         $this->flowElements = $flowElements;
-
     }
-
 };

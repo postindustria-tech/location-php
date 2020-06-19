@@ -19,13 +19,13 @@
 			"name": "Joseph Dix",
             "email": "joseph@51degrees.com"
         }
-	],
+    ],
     "license": "EUPL-1.2", 
     "type": "library",
     "autoload": {
         "classmap": [
-            "geoLocation.php",
-            "geoLocationPipelineBuilder.php"
+            "GeoLocationCloud.php",
+            "GeoLocationPipelineBuilder.php"
         ]
     },
     "require": {

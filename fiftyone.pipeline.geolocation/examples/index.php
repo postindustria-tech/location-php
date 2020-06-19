@@ -25,13 +25,20 @@
 
 require(__DIR__ . "/../vendor/autoload.php");
 
-use fiftyone\pipeline\cloudrequestengine\cloudRequestEngine;
-use fiftyone\pipeline\geolocation\geoLocationPipelineBuilder;
+use fiftyone\pipeline\cloudrequestengine\CloudRequestEngine;
+use fiftyone\pipeline\geolocation\GeoLocationPipelineBuilder;
+$params = array(
+    "resourceKey" => $_ENV["RESOURCEKEY"],
+    "locationProvider" => "fiftyonedegrees");
 
-$geolocationPipeline = new geoLocationPipelineBuilder(array(
-    "resourceKey" => "AQS5HKcy0uPi3zrv1kg",
-    "locationProvider" => "fiftyonedegrees"
-));
+if ($params["resourceKey"] === "!!YOUR_RESOURCE_KEY!!") {
+    $this->fail("You need to create a resource key at " .
+    "https://configure.51degrees.com and paste it into the " .
+    "phpunit.xml config file, " .
+    "replacing !!YOUR_RESOURCE_KEY!!.");
+}
+
+$geolocationPipeline = new GeoLocationPipelineBuilder($params);
 
 $geolocationPipeline = $geolocationPipeline->build();
 
@@ -41,7 +48,7 @@ $flowData->evidence->setFromWebRequest();
 
 $pipelineResult = $flowData->process();
 
-$javascript = $pipelineResult->get("javascriptbundler")->get("javascript");
+$javascript = $pipelineResult->get("javascriptbuilder")->get("javascript");
 
 echo "<script>";
 echo $javascript;
