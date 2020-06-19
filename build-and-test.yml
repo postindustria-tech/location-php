@@ -21,7 +21,7 @@ steps:
   displayName: 'Use PHP version $(phpVersion)'
 
 - script: |
-    composer install --no-interaction --prefer-dist --working-dir=fiftyone.pipeline.geolocation
+    composer install --no-interaction --prefer-dist
   displayName: 'Install dependencies'
 
 - script: |
