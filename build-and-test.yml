@@ -21,7 +21,7 @@ steps:
   displayName: 'Use PHP version $(phpVersion)'
 
 - script: |
-    composer install --no-interaction --prefer-dist --working-dir=FiftyOne.Pipeline.GeoLocation
+    composer install --no-interaction --prefer-dist
   displayName: 'Install dependencies'
 
 - script: |
@@ -31,6 +31,10 @@ steps:
     sudo mv phpunit /usr/local/bin/phpunit
   displayName: 'install PHPUnit 5'
   condition: eq(variables['phpVersion'], '5.6')
+
+- script: |
+    sed -i 's,.*name="RESOURCEKEY".*$,<env name="RESOURCEKEY" value="$(resourceKey)"/>,' phpunit.xml
+  displayName: 'Set resource key'
 
 - script: |
     phpunit --log-junit test-results.xml
