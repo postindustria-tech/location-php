@@ -38,14 +38,15 @@ class GeoLocationPipelineBuilder extends PipelineBuilder
     public $resourceKey;
     public $licenseKey;
 
+    /**
+     * @param {Array} settings
+     * @param {String} settings.resourceKey
+     * @param {String} settings.cloudEndPoint custom endpoint for the cloud service
+     * @param {Array} settings.restrictedProperties (list of properties to restrict the results to)
+
+    **/
     public function __construct($settings)
     {
-        /**
-        * Constructor takes a settings array with pipeline settings
-        * Including:
-        * * locationProvider (digitalelement or fiftyonedegrees)
-        * * resourceKey
-        */
         parent::__construct($settings);
 
         // Add cloudrequestEngine
