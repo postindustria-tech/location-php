@@ -21,8 +21,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-/*
- * @example cloud/webIntegration.php
+/** @example cloud/webIntegration.php
  *
  * @include{doc} example-web-integration-location.txt
  *
@@ -229,12 +228,18 @@ in the JSON endpoint provided data
         // This function will fire when the JSON data object is updated
         // with information from the server.
         // The sequence is:
-        // 1. Response contains JavaScript property 'JavaScript'. This is not executed immediately on the client as it will prompt the user to allow access to location.
-        // 2. When the button is clicked, the fod.complete function is called, passing 'location' as the second parameter. This lets the code know that we want to execute
-        // any JavaScript needed to obtain the location data that is needed to determine the user's postal address details.
-        // 3. The execution of the location JavaScript triggers a background callback to the webserver that includes the new evidence (i.e. lat/lon).
-        // 4. The web server responds with new JSON data that contains the updated property values based on the new evidence.
-        // 5. The JavaScript integrates the new JSON data and fires the 'complete' callback function below, which then displays the results.
+        // 1. Response contains JavaScript property 'JavaScript'. This is not executed 
+        // immediately on the client as it will prompt the user to allow access to location.
+        // 2. When the button is clicked, the fod.complete function is called, passing 'location' 
+        // as the second parameter. This lets the code know that we want to execute
+        // any JavaScript needed to obtain the location data that is needed to determine the 
+        // user's postal address details.
+        // 3. The execution of the location JavaScript triggers a background callback 
+        // to the webserver that includes the new evidence (i.e. lat/lon).
+        // 4. The web server responds with new JSON data that contains the updated 
+        // property values based on the new evidence.
+        // 5. The JavaScript integrates the new JSON data and fires the 'complete' 
+        // callback function below, which then displays the results.
         fod.complete(function (data) {
             if(data.location){
                 document.getElementById('countryclient').innerHTML = data.location.country;
