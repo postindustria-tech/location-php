@@ -19,8 +19,9 @@
  * including the attribution notice(s) required under Article 5 of the EUPL
  * in the end user terms of the application under an appropriate heading,
  * such notice(s) shall fulfill the requirements of that article.
- * ********************************************************************* /*
-/*
+ * *********************************************************************/
+
+/**
  * @example cloud/combiningservices.php
  *
  * Example of using the 51Degrees geo-location Cloud alongside 51Degrees device
