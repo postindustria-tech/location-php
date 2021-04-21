@@ -36,15 +36,16 @@ Make sure to select the latest version from [Composer.][composer]
 
 ## Examples
 
-Examples can be found in the `fiftyone.pipeline.geolocation/` folder. See below for a list of examples.
+Examples can be found in the `examples` folder. See below for a list of examples.
 
 |Example|Description|Implemtation|
 |-------|-----------|------------|
 |gettingstarted.php|This example uses geo-location to determine the country from a longitude and latitude.|Cloud|
 |configurefromfile.php|This examples creates a pipeline from a configuration file to set up geo-location.|Cloud|
 |combiningservices.php|This example uses geo-location alongside device detection to determine the country and device.|Cloud|
+|webIntegration.php|This example demonstrates how to integrate the geo-location solution into a website.|Cloud|
 
-To run the examples, go to the `fiftyone.pipeline.geolocation/examples` directory and run:
+To run the examples, go to the `examples` directory and run:
 
 `php -S locahost:8080`
 
@@ -53,10 +54,10 @@ by browsing to `localhost:8080/cloud/gettingstarted.php`.
 
 ## Tests
 
-In this repository, there are tests for the examples. 
+In this repository, there are tests using phpunit. 
 You will need to install the package dependencies to run them:
 
-`cd fiftyone.pipeline.geolocation && composer install`
+`composer install`
 
 To run the tests, then call:
 
