@@ -3,6 +3,9 @@ trigger: none
 pool:
   vmImage: 'ubuntu-latest'
 
+variables: 
+  - group: InternalKeys
+
 strategy:
   matrix:
     PHP 5.6:
@@ -23,6 +26,21 @@ steps:
     sudo update-alternatives --set phar.phar /usr/bin/phar.phar$(phpVersion)
     php -version
   displayName: 'Use PHP version $(phpVersion)'
+  
+# -----------------------------------------------------------
+# This step can be used to run through the CI process with new
+# versions of core pipeline dependencies before they are made 
+# available externally.  
+# -----------------------------------------------------------
+#- script: |
+#    ls
+#    git -c http.https://51degrees.visualstudio.com.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" clone https://51degrees.visualstudio.com/DefaultCollection/Pipeline/_git/pipeline-php-cloudrequestengine
+#    ls
+#    cd pipeline-php-cloudrequestengine
+#    git -c http.https://51degrees.visualstudio.com.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" checkout --track origin/hotfix/v4.2.1
+#    cd ..
+#    ls
+#  displayName: 'Clone the development branch'
 
 - script: |
     composer install --no-interaction --prefer-dist
@@ -37,7 +55,9 @@ steps:
   condition: eq(variables['phpVersion'], '5.6')
 
 - script: |
-    sed -i 's,.*name="RESOURCEKEY".*$,<env name="RESOURCEKEY" value="$(resourceKey)"/>,' phpunit.xml
+    sed -i 's,.*name="RESOURCEKEY".*$,<env name="RESOURCEKEY" value="$(SuperResourceKey)" force="true"/>,' phpunit.xml
+    sed -i 's,.*name="FOD_CLOUD_API_URL".*$,<env name="FOD_CLOUD_API_URL" value="$(FOD_CLOUD_API_URL)" force="true"/>,' phpunit.xml
+    cat phpunit.xml
   displayName: 'Set resource key'
 
 - script: |
