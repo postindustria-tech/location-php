@@ -51,4 +51,11 @@ class GeoLocationCloud extends CloudEngine
             $this->dataKey = "location";
         }
     }
+
+    public function onRegistration($pipeline) {
+        if (!array_key_exists($this->dataKey, $pipeline->flowElementsList["cloud"]->flowElementProperties)) {
+            throw new \Exception("Location data was not available. Check that this key is authorised for geolocation data");
+        }
+        return parent::onRegistration($pipeline);
+    }
 }
