@@ -43,12 +43,18 @@ class GeoLocationPipelineBuilder extends PipelineBuilder
      * @param {String} settings.resourceKey
      * @param {String} settings.cloudEndPoint custom endpoint for the cloud service
      * @param {Array} settings.restrictedProperties (list of properties to restrict the results to)
-
+     * @param {String} options.cloudRequestOrigin value to use for the 
+     * Origin header when sending requests to cloud.
     **/
     public function __construct($settings)
     {
         parent::__construct($settings);
 
+        // Translate the cloud options with different names
+        if(array_key_exists("cloudEndPoint", $settings)) {
+            $settings["baseURL"] = $settings["cloudEndPoint"];
+        }
+                
         // Add cloudrequestEngine
         $cloud = new CloudRequestEngine($settings);
 
