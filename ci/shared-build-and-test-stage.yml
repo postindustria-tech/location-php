@@ -46,6 +46,11 @@ stages:
       lfs: true
       persistCredentials: true
 
+    - script: |
+        sudo composer self-update --2.2
+      displayName: 'Use Composer 2.2'
+      condition: eq(variables['phpVersion'], '5.6')
+
     # Install php and set as default Version to be used in the next tasks.
     - script: |
         sudo add-apt-repository ppa:ondrej/php
