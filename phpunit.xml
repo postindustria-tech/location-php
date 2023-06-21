@@ -1,12 +1,12 @@
 <phpunit>
   <php>
-    <env name="RESOURCEKEY" value="!!YOUR_RESOURCE_KEY!!" force="true"/>
-    <env name="FOD_CLOUD_API_URL" value="" force="true"/>
+    <env name="RESOURCEKEY" value="!!YOUR_RESOURCE_KEY!!"/>
+    <env name="FOD_CLOUD_API_URL" value=""/>
   </php>
   <testsuites>
-    <testsuite name="Tests">
-      <file>examples/index.php</file>
-      <file>tests/geolocation.php</file>
+    <testsuite name="Integration">
+      <file>tests/ExampleTests.php</file>
+      <file>tests/GeoLocationTests.php</file>
     </testsuite>
   </testsuites>
 </phpunit>

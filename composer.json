@@ -36,5 +36,10 @@
     "require-dev": {
         "51degrees/fiftyone.devicedetection": "4.*"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "config": {
+        "allow-plugins": {
+            "nodejs-php-fallback/nodejs-php-fallback": false
+        }
+    }
 }
