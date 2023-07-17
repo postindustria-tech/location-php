@@ -7,6 +7,3 @@
 [submodule "pipeline-php-cloudrequestengine"]
 	path = pipeline-php-cloudrequestengine
 	url = ../pipeline-php-cloudrequestengine
-[submodule "ci/common-ci"]
-	path = ci/common-ci
-	url = ../common-ci

@@ -14,10 +14,10 @@
  * amended by the European Commission) shall be deemed incompatible for
  * the purposes of the Work and the provisions of the compatibility
  * clause in Article 5 of the EUPL shall not apply.
- * 
- * If using the Work as, or as part of, a network application, by 
+ *
+ * If using the Work as, or as part of, a network application, by
  * including the attribution notice(s) required under Article 5 of the EUPL
- * in the end user terms of the application under an appropriate heading, 
+ * in the end user terms of the application under an appropriate heading,
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
@@ -34,8 +34,6 @@ use fiftyone\pipeline\geolocation\GeoLocationPipelineBuilder;
 
 class GeoLocationTests extends TestCase
 {
-    protected $CSVDataFile = __DIR__ . "/51Degrees.csv";
-
     protected $iPhoneUA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_2 like Mac OS X) AppleWebKit/604.4.7 (KHTML, like Gecko) Mobile/15C114';
 
     protected $testLat = "51.4578261";
@@ -104,34 +102,11 @@ class GeoLocationTests extends TestCase
         $this->availableProperties($result->location, "location");
     }
 
-    public function testAvailableProperties_DigitalElement(){
-        $pipeline = new GeoLocationPipelineBuilder(array(
-            "resourceKey" => $this->getResourceKey(),
-            "locationProvider" => "digitalelement"
-        ));
-
-        $pipeline = $pipeline->build();
-        
-        $flowData = $pipeline->createFlowData();
-
-        $flowData->evidence->set("query.51D_Pos_latitude", $this->testLat);
-        $flowData->evidence->set("query.51D_Pos_longitude", $this->testLon);
-
-        $result = $flowData->process();
-
-        $this->availableProperties($result->location_digitalelement, "location_digitalelement");
-    }
-
     public function testValueTypes_51Degrees() 
     {
         $this->testValueTypes("fiftyonedegrees", "location");
     }
 
-    public function testValueTypes_DigitalElement() 
-    {
-        $this->testValueTypes("digitalelement", "location_digitalelement");        
-    }
-    
     private function testValueTypes($locationProvider, $elementKey) 
     {
         $pipeline = new GeoLocationPipelineBuilder(array(
