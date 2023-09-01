@@ -8,7 +8,7 @@ on:
         type: boolean
         description: Dry Run
 hedule:
-- cron: '0 1 * * *'
+- cron: '30 3 * * *'
 
 jobs:
   Nightly_Documentation_Update:
