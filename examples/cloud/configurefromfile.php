@@ -88,7 +88,7 @@ if (substr($resourceKey, 0, 2) === "!!") {
     return;
 }
 
-$pipeline = $builder->buildFromConfig($configFile)->build();
+$pipeline = $builder->buildFromConfig($configFile);
 
 $flowData = $pipeline->createFlowData();
 

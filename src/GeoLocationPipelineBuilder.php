@@ -25,7 +25,6 @@ namespace fiftyone\pipeline\geolocation;
 
 use fiftyone\pipeline\core\PipelineBuilder;
 use fiftyone\pipeline\cloudrequestengine\CloudRequestEngine;
-use fiftyone\pipeline\geolocation\GeoLocationCloud;
 
 /**
 * Extension of pipelineBuilder class that allows for the quick generation
@@ -72,4 +71,4 @@ class GeoLocationPipelineBuilder extends PipelineBuilder
 
         $this->flowElements = $flowElements;
     }
-};
+}

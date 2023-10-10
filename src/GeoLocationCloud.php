@@ -23,10 +23,6 @@
 
 namespace fiftyone\pipeline\geolocation;
 
-if(!class_exists("\Composer\Autoload\ClassLoader")) {
-  require(__DIR__ . "/vendor/autoload.php");
-}
-
 use fiftyone\pipeline\cloudrequestengine\CloudEngine;
 
 class GeoLocationCloud extends CloudEngine

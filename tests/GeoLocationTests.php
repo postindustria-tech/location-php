@@ -22,7 +22,7 @@
  * ********************************************************************* */
 
 
-require(__DIR__ . "/../vendor/autoload.php");
+namespace fiftyone\pipeline\geolocation\tests;
 
 // Fake remote address for web integration
 
