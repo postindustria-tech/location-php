@@ -88,7 +88,7 @@ if (substr($resourceKey, 0, 2) === "!!") {
     return;
 }
 
-$pipeline = $builder->buildFromConfig($configFile)->build();
+$pipeline = $builder->buildFromConfig($configFile);
 
 $flowData = $pipeline->createFlowData();
 
@@ -112,4 +112,4 @@ if ($country->hasValue) {
 } else {
     // Echo out why the value isn't meaningful
     echo $country->noValueMessage;
-};
+}
