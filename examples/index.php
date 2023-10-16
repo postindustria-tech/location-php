@@ -53,4 +53,3 @@ $javascript = $pipelineResult->get("javascriptbuilder")->get("javascript");
 echo "<script>";
 echo $javascript;
 echo "</script>";
-

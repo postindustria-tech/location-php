@@ -106,4 +106,4 @@ if ($country->hasValue) {
 } else {
     // Echo out why the value isn't meaningful
     echo $country->noValueMessage;
-};
+}
