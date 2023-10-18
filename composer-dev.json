@@ -23,10 +23,9 @@
     "license": "EUPL-1.2", 
     "type": "library",
     "autoload": {
-        "classmap": [
-            "GeoLocationCloud.php",
-            "GeoLocationPipelineBuilder.php"
-        ]
+        "psr-4": {
+            "fiftyone\\pipeline\\geolocation\\": "src/"
+        }
     },
     "repositories": [
         {
