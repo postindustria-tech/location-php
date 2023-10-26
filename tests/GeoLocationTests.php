@@ -168,46 +168,22 @@ class GeoLocationTests extends TestCase
 
                 switch ($expectedType) {
                     case "Boolean":
-                        if (method_exists($this, 'assertInternalType')) {
-                            $this->assertInternalType("boolean", $value, $key);
-                        } else {
-                            $this->assertIsBool($value, $key);
-                        }
+                        $this->assertIsBool($value, $key);
                         break;
                     case 'String':
-                        if (method_exists($this, 'assertInternalType')) {
-                            $this->assertInternalType("string", $value, $key);
-                        } else {
-                            $this->assertIsString($value, $key);
-                        }
+                        $this->assertIsString($value, $key);
                         break;
                     case 'JavaScript':
-                        if (method_exists($this, 'assertInternalType')) {
-                            $this->assertInternalType("string", $value, $key);
-                        } else {
-                            $this->assertIsString($value, $key);
-                        }
+                        $this->assertIsString($value, $key);
                         break;
                     case 'Int32':
-                        if (method_exists($this, 'assertInternalType')) {
-                            $this->assertInternalType("integer", $value, $key);
-                        } else {
-                            $this->assertIsInt($value, $key);
-                        }
+                        $this->assertIsInt($value, $key);
                         break;
                     case 'Double':
-                        if (method_exists($this, 'assertInternalType')) {
-                            $this->assertInternalType("double", $value, $key);
-                        } else {
-                            $this->assertIsFloat($value, $key);
-                        }
+                        $this->assertIsFloat($value, $key);
                         break;
                     case 'Array':
-                        if (method_exists($this, 'assertInternalType')) {
-                            $this->assertInternalType("array", $value, $key);
-                        } else {
-                            $this->assertIsArray($value, $key);
-                        }
+                        $this->assertIsArray($value, $key);
                         break;
                     default:
                         $this->fail("expected type for " . $key . " was " . $expectedType);
