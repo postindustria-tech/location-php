@@ -61,7 +61,7 @@ You will need to install the package dependencies to run them:
 
 To run the tests, then call:
 
-`phpunit`
+`phpunit --fail-on-warning --display-warnings --log-junit test-results.xml`
 
 ## Project documentation
 
