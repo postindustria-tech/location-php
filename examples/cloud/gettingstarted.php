@@ -17,6 +17,7 @@
  *
  * If using the Work as, or as part of, a network application, by
  * including the attribution notice(s) required under Article 5 of the EUPL
+ * 
  * in the end user terms of the application under an appropriate heading,
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
@@ -26,7 +27,7 @@
  * This example shows how a simple location pipeline can be built
  * that looks up an address from longitude and latitude
  *
- * This example is available in full on [GitHub](https://github.com/51Degrees/location-php/blob/master/examples/cloud/gettingStarted.php).
+ * This example is available in full on [GitHub](https://github.com/51Degrees/location-php/blob/main/examples/cloud/gettingstarted.php).
  *
  * To run this example, you will need to create a **resource key**.
  * The resource key is used as short-hand to store the particular set of
