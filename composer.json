@@ -39,9 +39,9 @@
     },
     "require-dev": {
         "51degrees/fiftyone.devicedetection": "4.*",
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "friendsofphp/php-cs-fixer": "^3.39"
     },
-    "minimum-stability": "dev",
     "config": {
         "allow-plugins": {
             "nodejs-php-fallback/nodejs-php-fallback": false
