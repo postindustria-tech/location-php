@@ -21,18 +21,18 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-
 namespace fiftyone\pipeline\geolocation\tests;
 
 use PHPUnit\Framework\TestCase;
 
 class ExampleTests extends TestCase
 {
-    public function testExamples(){
+    public function testExamples()
+    {
         ob_start(); // hide output
-        include __DIR__ . "/../examples/index.php";
+        include __DIR__ . '/../examples/index.php';
         ob_end_clean(); // discard output
 
-        $this->assertTrue(!empty($javascript));
+        $this->assertNotEmpty($javascript);
     }
 }

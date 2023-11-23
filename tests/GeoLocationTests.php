@@ -21,23 +21,19 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-
 namespace fiftyone\pipeline\geolocation\tests;
 
 // Fake remote address for web integration
+$_SERVER['REMOTE_ADDR'] = '0.0.0.0';
 
-$_SERVER["REMOTE_ADDR"] = "0.0.0.0";
-
-use PHPUnit\Framework\TestCase;
-use fiftyone\pipeline\cloudrequestengine\CloudRequestEngine;
 use fiftyone\pipeline\geolocation\GeoLocationPipelineBuilder;
+use PHPUnit\Framework\TestCase;
 
 class GeoLocationTests extends TestCase
 {
     protected $iPhoneUA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_2 like Mac OS X) AppleWebKit/604.4.7 (KHTML, like Gecko) Mobile/15C114';
-
-    protected $testLat = "51.4578261";
-    protected $testLon = "-0.975922996290084";
+    protected $testLat = '51.4578261';
+    protected $testLon = '-0.975922996290084';
 
     // For some reason, the value of the 'county' property returned
     // by the call to the cloud is always null on the build agent,
@@ -45,135 +41,130 @@ class GeoLocationTests extends TestCase
     // After spending the best part of a day trying to resolve this,
     // we've  decided to exclude the county property from this test
     // for the moment.
-    protected $expectedProperties = array(
-        "location" => array(
-            "building", 
-            "streetnumber", 
-            "road", 
-            "town", 
-            //"county", 
-            "region", 
-            "state", 
-            "zipcode", 
-            "country", 
-            "countrycode", 
-            "javascript"),
-        "location_digitalelement" => array(
-            "town", 
-            "county", 
-            "region", 
-            "state", 
-            "zipcode", 
-            "country", 
-            "countrycode", 
-            "javascript")
-        );
+    protected $expectedProperties = [
+        'location' => [
+            'building',
+            'streetnumber',
+            'road',
+            'town',
+            // "county",
+            'region',
+            'state',
+            'zipcode',
+            'country',
+            'countrycode',
+            'javascript'
+        ],
+        'location_digitalelement' => [
+            'town',
+            'county',
+            'region',
+            'state',
+            'zipcode',
+            'country',
+            'countrycode',
+            'javascript'
+        ]
+    ];
 
-    private function getResourceKey() {
-
-        $resourceKey = $_ENV["RESOURCEKEY"];
-
-        if ($resourceKey === "!!YOUR_RESOURCE_KEY!!") {
-            $this->fail("You need to create a resource key at " .
-            "https://configure.51degrees.com and paste it into the " .
-            "phpunit.xml config file, " .
-            "replacing !!YOUR_RESOURCE_KEY!!.");
-        }
-
-        return $resourceKey;
-
-    }
-
-    public function testAvailableProperties_51Degrees(){
-        $pipeline = new GeoLocationPipelineBuilder(array(
-            "resourceKey" => $this->getResourceKey(),
-            "locationProvider" => "fiftyonedegrees"
-        ));
+    public function testAvailableProperties51Degrees()
+    {
+        $pipeline = new GeoLocationPipelineBuilder([
+            'resourceKey' => $this->getResourceKey(),
+            'locationProvider' => 'fiftyonedegrees'
+        ]);
 
         $pipeline = $pipeline->build();
-        
+
         $flowData = $pipeline->createFlowData();
 
-        $flowData->evidence->set("query.51D_Pos_latitude", $this->testLat);
-        $flowData->evidence->set("query.51D_Pos_longitude", $this->testLon);
+        $flowData->evidence->set('query.51D_Pos_latitude', $this->testLat);
+        $flowData->evidence->set('query.51D_Pos_longitude', $this->testLon);
 
         $result = $flowData->process();
 
-        $this->availableProperties($result->location, "location");
+        $this->availableProperties($result->location, 'location');
     }
 
-    public function testValueTypes_51Degrees() 
+    public function testValueTypes51Degrees()
     {
-        $this->testValueTypes("fiftyonedegrees", "location");
+        $this->testValueTypes('fiftyonedegrees', 'location');
     }
 
-    private function testValueTypes($locationProvider, $elementKey) 
+    private function getResourceKey()
     {
-        $pipeline = new GeoLocationPipelineBuilder(array(
-            "resourceKey" => $this->getResourceKey(),
-            "locationProvider" => $locationProvider
-        ));
+        $resourceKey = $_ENV['RESOURCEKEY'];
+
+        if ($resourceKey === '!!YOUR_RESOURCE_KEY!!') {
+            $this->fail('You need to create a resource key at ' .
+            'https://configure.51degrees.com and paste it into the ' .
+            'phpunit.xml config file, ' .
+            'replacing !!YOUR_RESOURCE_KEY!!.');
+        }
+
+        return $resourceKey;
+    }
+
+    private function testValueTypes($locationProvider, $elementKey)
+    {
+        $pipeline = new GeoLocationPipelineBuilder([
+            'resourceKey' => $this->getResourceKey(),
+            'locationProvider' => $locationProvider
+        ]);
 
         $pipeline = $pipeline->build();
-        
+
         $flowData = $pipeline->createFlowData();
 
-        $flowData->evidence->set("query.51D_Pos_latitude", $this->testLat);
-        $flowData->evidence->set("query.51D_Pos_longitude", $this->testLon);
+        $flowData->evidence->set('query.51D_Pos_latitude', $this->testLat);
+        $flowData->evidence->set('query.51D_Pos_longitude', $this->testLon);
 
         $result = $flowData->process();
 
         $properties = $pipeline->getElement($elementKey)->getProperties();
-                 
-        $this->valueTypes($properties, 
-            $result->get($elementKey), 
-            $this->expectedProperties[$elementKey]);        
+
+        $this->valueTypes(
+            $properties,
+            $result->get($elementKey),
+            $this->expectedProperties[$elementKey]
+        );
     }
 
     private function availableProperties($result, $dataKey)
     {
-        foreach ($this->expectedProperties[$dataKey] as &$property)
-        {
+        foreach ($this->expectedProperties[$dataKey] as &$property) {
             $apv = $result->getInternal($property);
 
             $this->assertNotNull($apv, $property);
 
             if ($apv->hasValue) {
-
                 $this->assertNotNull($apv->value, $property);
-
             } else {
-
                 $this->assertNotNull($apv->noValueMessage, $property);
-
             }
         }
     }
 
     private function valueTypes($properties, $result, $expectedProps)
     {
-        foreach ($properties as &$property)
-        {            
-            $key = strtolower($property["name"]);
+        foreach ($properties as &$property) {
+            $key = strtolower($property['name']);
 
-            if(in_array($key, $expectedProps)) {
-
+            if (in_array($key, $expectedProps)) {
                 $apv = $result->getInternal($key);
 
-                $expectedType = $property["type"];
-                
+                $expectedType = $property['type'];
+
                 $this->assertNotNull($apv, $key);
 
                 $value = $apv->value;
 
                 switch ($expectedType) {
-                    case "Boolean":
+                    case 'Boolean':
                         $this->assertIsBool($value, $key);
                         break;
-                    case 'String':
-                        $this->assertIsString($value, $key);
-                        break;
                     case 'JavaScript':
+                    case 'String':
                         $this->assertIsString($value, $key);
                         break;
                     case 'Int32':
@@ -186,8 +177,7 @@ class GeoLocationTests extends TestCase
                         $this->assertIsArray($value, $key);
                         break;
                     default:
-                        $this->fail("expected type for " . $key . " was " . $expectedType);
-                        break;
+                        $this->fail('expected type for ' . $key . ' was ' . $expectedType);
                 }
             }
         }
