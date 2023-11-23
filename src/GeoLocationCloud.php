@@ -27,31 +27,33 @@ use fiftyone\pipeline\cloudrequestengine\CloudEngine;
 
 class GeoLocationCloud extends CloudEngine
 {
-
     /**
-        * Constructor for GeolocationCloud
-        * If property not found, call the attached missing property service
-        * @param string locationProvider (digitalelement or fiftyonedegrees)
-    */
-    public function __construct($settings = array("locationProvider" => "fiftyonedegrees"))
+     * Constructor for GeolocationCloud
+     * If property not found, call the attached missing property service.
+     *
+     * @param array{
+     *     locationProvider: 'digitalelement'|'fiftyonedegrees'
+     * } $settings
+     */
+    public function __construct($settings = ['locationProvider' => 'fiftyonedegrees'])
     {
-        $locationProvider = $settings["locationProvider"];
+        $locationProvider = $settings['locationProvider'];
 
-        if ($locationProvider !== "fiftyonedegrees" && $locationProvider !== "digitalelement") {
-            throw new \Exception("Location provider should be fiftyonedegrees or digitalelement");
+        if ($locationProvider !== 'fiftyonedegrees' && $locationProvider !== 'digitalelement') {
+            throw new \Exception('Location provider should be fiftyonedegrees or digitalelement');
         }
 
-        if ($locationProvider === "digitalelement") {
-            $this->dataKey = "location_digitalelement";
+        if ($locationProvider === 'digitalelement') {
+            $this->dataKey = 'location_digitalelement';
         } else {
-            $this->dataKey = "location";
+            $this->dataKey = 'location';
         }
     }
 
     public function processInternal($flowData)
     {
-        if (!array_key_exists($this->dataKey, $flowData->pipeline->flowElementsList["cloud"]->flowElementProperties)) {
-            throw new \Exception("Location data was not available. Check that this key is authorised for geolocation data");
+        if (!array_key_exists($this->dataKey, $flowData->pipeline->flowElementsList['cloud']->flowElementProperties)) {
+            throw new \Exception('Location data was not available. Check that this key is authorised for geolocation data');
         }
 
         parent::processInternal($flowData);
