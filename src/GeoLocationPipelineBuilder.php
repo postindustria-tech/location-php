@@ -21,6 +21,8 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+declare(strict_types=1);
+
 namespace fiftyone\pipeline\geolocation;
 
 use fiftyone\pipeline\cloudrequestengine\CloudRequestEngine;
@@ -32,10 +34,17 @@ use fiftyone\pipeline\core\PipelineBuilder;
  */
 class GeoLocationPipelineBuilder extends PipelineBuilder
 {
-    public $restrictedProperties;
+    /**
+     * @var array<string>
+     */
+    public array $restrictedProperties;
+    
+    /**
+     * @var \fiftyone\pipeline\engines\DataKeyedCache
+     */
     public $cache;
-    public $resourceKey;
-    public $licenseKey;
+    public string $resourceKey;
+    public string $licenseKey;
 
     /**
      * settings.cloudEndPoint custom endpoint for the cloud service
@@ -44,17 +53,17 @@ class GeoLocationPipelineBuilder extends PipelineBuilder
      *
      * @param array{
      *     resourceKey: string,
-     *     cloudEndPoint: string,
-     *     restrictedProperties: array,
-     *     cloudRequestOrigin: string
+     *     cloudEndPoint?: string,
+     *     restrictedProperties?: array<string>,
+     *     cloudRequestOrigin?: string
      * } $settings
      */
-    public function __construct($settings)
+    public function __construct(array $settings)
     {
         parent::__construct($settings);
 
         // Translate the cloud options with different names
-        if (array_key_exists('cloudEndPoint', $settings)) {
+        if (isset($settings['cloudEndPoint'])) {
             $settings['baseURL'] = $settings['cloudEndPoint'];
         }
 
