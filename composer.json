@@ -1,22 +1,22 @@
 {
     "name": "51degrees/fiftyone.geolocation",
     "description": "Geo-Location engines for 51Degrees Pipeline API - Get postal address details from the device connecting to your website or service",   
-	"authors" : [
-		{
-			"name": "Filip Hnízdo",
+    "authors" : [
+        {
+            "name": "Filip Hnízdo",
             "email": "filip@octophin.com",
             "homepage": "https://octophindigital.com/"
         },
-		{
-			"name": "Steve Ballantine",
+        {
+            "name": "Steve Ballantine",
             "email": "stephen@51degrees.com"
         },
-		{
-			"name": "Ben Shilito",
+        {
+            "name": "Ben Shilito",
             "email": "ben@51degrees.com"
         },
-		{
-			"name": "Joseph Dix",
+        {
+            "name": "Joseph Dix",
             "email": "joseph@51degrees.com"
         }
     ],
@@ -39,9 +39,9 @@
         "51degrees/fiftyone.pipeline.cloudrequestengine": "4.*"
     },
     "require-dev": {
-        "51degrees/fiftyone.devicedetection": "4.*",
         "phpunit/phpunit": "*",
-        "friendsofphp/php-cs-fixer": "^3.39"
+        "friendsofphp/php-cs-fixer": "^3.39",
+        "phpstan/phpstan": "^1.10"
     },
     "config": {
         "allow-plugins": {
