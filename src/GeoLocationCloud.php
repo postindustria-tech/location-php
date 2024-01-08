@@ -21,9 +21,12 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+declare(strict_types=1);
+
 namespace fiftyone\pipeline\geolocation;
 
 use fiftyone\pipeline\cloudrequestengine\CloudEngine;
+use fiftyone\pipeline\core\FlowData;
 
 class GeoLocationCloud extends CloudEngine
 {
@@ -31,15 +34,17 @@ class GeoLocationCloud extends CloudEngine
      * Constructor for GeolocationCloud
      * If property not found, call the attached missing property service.
      *
-     * @param array{
-     *     locationProvider: 'digitalelement'|'fiftyonedegrees'
-     * } $settings
+     * @param array<string, string|array<string>> $settings
+     * @throws \Exception
      */
-    public function __construct($settings = ['locationProvider' => 'fiftyonedegrees'])
+    public function __construct(array $settings = ['locationProvider' => 'fiftyonedegrees'])
     {
         $locationProvider = $settings['locationProvider'];
 
-        if ($locationProvider !== 'fiftyonedegrees' && $locationProvider !== 'digitalelement') {
+        if (
+            $locationProvider !== 'fiftyonedegrees' && 
+            $locationProvider !== 'digitalelement'
+        ) {
             throw new \Exception('Location provider should be fiftyonedegrees or digitalelement');
         }
 
@@ -50,7 +55,7 @@ class GeoLocationCloud extends CloudEngine
         }
     }
 
-    public function processInternal($flowData)
+    public function processInternal(FlowData $flowData): void
     {
         if (!array_key_exists($this->dataKey, $flowData->pipeline->flowElementsList['cloud']->flowElementProperties)) {
             throw new \Exception('Location data was not available. Check that this key is authorised for geolocation data');
