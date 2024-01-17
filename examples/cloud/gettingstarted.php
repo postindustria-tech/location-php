@@ -54,8 +54,8 @@ use fiftyone\pipeline\geolocation\GeoLocationPipelineBuilder;
 
 // Check if there is a resource key in the environment variable and use
 // it if there is one. (This is used for automated testing)
-if (isset($_ENV["RESOURCEKEY"])) {
-    $resourceKey = $_ENV["RESOURCEKEY"];
+if (isset($_ENV["resource_key"])) {
+    $resourceKey = $_ENV["resource_key"];
 } else {
     $resourceKey = "!!YOUR_RESOURCE_KEY!!";
 }

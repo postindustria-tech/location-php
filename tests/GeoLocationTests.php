@@ -93,7 +93,7 @@ class GeoLocationTests extends TestCase
 
     private function getResourceKey()
     {
-        $resourceKey = $_ENV['RESOURCEKEY'];
+        $resourceKey = $_ENV['resource_key'];
 
         if ($resourceKey === '!!YOUR_RESOURCE_KEY!!') {
             $this->fail('You need to create a resource key at ' .
