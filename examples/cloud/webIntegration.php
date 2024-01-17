@@ -32,23 +32,28 @@
 
 require(__DIR__ . "/../../vendor/autoload.php");
 
+use fiftyone\pipeline\geolocation\examples\cloud\classes\Constants;
 use fiftyone\pipeline\geolocation\GeoLocationPipelineBuilder;
 
 // Check if there is a resource key in the environment variable and use
 // it if there is one. (This is used for automated testing)
-if (isset($_ENV["RESOURCEKEY"])) {
-    $resourceKey = $_ENV["RESOURCEKEY"];
+if (isset($_ENV[Constants::RESOURCE_KEY_ENV_VAR])) {
+    $resourceKey = $_ENV[Constants::RESOURCE_KEY_ENV_VAR];
 } else {
     $resourceKey = "!!YOUR_RESOURCE_KEY!!";
 }
 
 if (substr($resourceKey, 0, 2) === "!!") {
-    echo "You need to create a resource key at " .
-        "https://configure.51degrees.com/v399y42f and paste it into " .
-        "the code, replacing !!YOUR_RESOURCE_KEY!!.";
-    echo "\n<br/>";
-    echo "Make sure to include the Country, State, County, Town and " .
-        "JavaScript properties as they are used by this example.\n<br />";
+    $message = 'No resource key specified in the environment variable ';
+    $message .= '"' . Constants::RESOURCE_KEY_ENV_VAR . '"' . '<br/>';
+    $message .= 'Create a resource key with the properties required by this example';
+    $message .= 'at https://configure.51degrees.com/v399y42f' . '<br/>';
+    $message .= 'Once complete, populate the environment variable ';
+    $message .= 'mentioned at the start of this message with the key.' . '<br/>';
+    $message .= "Make sure to include the Country, State, County, Town and ";
+    $message .= "JavaScript properties as they are used by this example.<br />";
+    echo $message;
+
     return;
 }
 
