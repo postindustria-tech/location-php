@@ -1,38 +1,56 @@
 {
     "name": "51degrees/fiftyone.geolocation",
-    "description": "Geo-Location engines for 51Degrees Pipeline API - Get postal address details from the device connecting to your website or service",   
-    "authors" : [
+    "description": "Geolocation engines for 51Degrees Pipeline API. Perform reverse geocoding using longitude and latitude to populate postal addresses.",
+    "keywords":
+    [
+        "geolocation",
+        "location",
+        "latitude",
+        "longitude",
+        "geocoding",
+        "51degrees"
+    ],
+    "authors":
+    [
         {
             "name": "51Degrees Engineering",
             "email": "engineering@51degrees.com"
         }
     ],
-    "license": "EUPL-1.2", 
+    "license": "EUPL-1.2",
     "type": "library",
-    "autoload": {
-        "psr-4": {
+    "autoload":
+    {
+        "psr-4":
+        {
             "fiftyone\\pipeline\\geolocation\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
+    "autoload-dev":
+    {
+        "psr-4":
+        {
             "fiftyone\\pipeline\\geolocation\\tests\\": "tests/",
             "fiftyone\\pipeline\\geolocation\\examples\\cloud\\classes\\": "examples/cloud/classes/"
         }
     },
-    "require": {
+    "require":
+    {
         "php": ">=7.4",
         "51degrees/fiftyone.pipeline.core": "4.*",
         "51degrees/fiftyone.pipeline.engines": "4.*",
         "51degrees/fiftyone.pipeline.cloudrequestengine": "4.*"
     },
-    "require-dev": {
+    "require-dev":
+    {
         "phpunit/phpunit": "*",
         "friendsofphp/php-cs-fixer": "^3.39",
         "phpstan/phpstan": "^1.10"
     },
-    "config": {
-        "allow-plugins": {
+    "config":
+    {
+        "allow-plugins":
+        {
             "nodejs-php-fallback/nodejs-php-fallback": false
         }
     }
